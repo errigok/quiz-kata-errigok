@@ -15,10 +15,12 @@ if(LINUX)
 else()
     message(STATUS ">>> Not Linux")
     # stuff that should happen not on Linux 
-    set(CMAKE_C_COMPILER "C:/msys64/mingw64/bin/gcc.exe")
-    set(CMAKE_CXX_COMPILER "C:/msys64/mingw64/bin/g++.exe")
+    set(CMAKE_C_COMPILER "C:/msys64/ucrt64/bin/gcc.exe")
+    set(CMAKE_CXX_COMPILER "C:/msys64/ucrt64/bin/g++.exe")
     #set(CMAKE_PREFIX_PATH "C:/Users/kamilae/vcpkg/installed/x64-windows/share")
-    set(CMAKE_TOOLCHAIN_FILE "C:/Users/kamilae/vcpkg/scripts/buildsystems/vcpkg.cmake")
+    #https://stackoverflow.com/questions/32866503/get-the-system-home-directory-in-cmake-on-linux
+    file(TO_CMAKE_PATH "$ENV{USERPROFILE}" USER_PROFILE)
+    set(CMAKE_TOOLCHAIN_FILE "${USER_PROFILE}/vcpkg/scripts/buildsystems/vcpkg.cmake")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lcurl"),
 endif()
 #set(CMAKE_C_COMPILER "C:/msys64/mingw64/bin/gcc.exe")
@@ -52,7 +54,7 @@ if(LINUX)
     endif()
 else()
     # Set the CURL_ROOT environment variable
-    set(CURL_ROOT "C:/Users/kamilae/vcpkg/installed/x64-windows")
+    set(CURL_ROOT "${USER_PROFILE}/vcpkg/installed/x64-windows")
 
     # Specify the paths to the cURL library and include directories
     set(CURL_INCLUDE_DIR "${CURL_ROOT}/include")
@@ -61,15 +63,15 @@ endif()
 
 find_package(CURL REQUIRED)
 
-add_executable(main src/main.cpp src/question.cpp src/button.cpp src/scroll_bar.cpp src/drop_down.cpp src/number_text_box.cpp src/radio_button.cpp)
+add_executable(quiz src/main.cpp src/question.cpp src/button.cpp src/scroll_bar.cpp src/drop_down.cpp src/number_text_box.cpp src/radio_button.cpp)
 if(LINUX)
-    target_link_libraries(main PRIVATE sfml-graphics)
-    target_link_libraries(main PUBLIC CURL::libcurl Freetype m)
-    #target_link_libraries(main Freetype)
+    target_link_libraries(quiz PRIVATE sfml-graphics)
+    target_link_libraries(quiz PUBLIC CURL::libcurl Freetype m)
+    #target_link_libraries(quiz Freetype)
 else()
     include_directories(${CURL_INCLUDE_DIR})
-    target_link_libraries(main PRIVATE sfml-graphics)
-    target_link_libraries(main PUBLIC CURL::libcurl)
+    target_link_libraries(quiz PRIVATE sfml-graphics)
+    target_link_libraries(quiz PUBLIC CURL::libcurl)
 endif()
 
 

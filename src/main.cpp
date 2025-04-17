@@ -264,7 +264,7 @@ int main()
         ConvertHTMLCodes(&categories.categories[i].name);
     }
     
-    sf::RenderWindow window(sf::VideoMode(1000, 1200), "Quiz");
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Quiz");
     sf::Font font;
     if (!font.loadFromFile(DEFAULT_FONT))
     {

@@ -1,0 +1,40 @@
+Windows
+- Install vcpkg
+- Install libcurl through vckpg
+- VSCode - GCC 13.1.0 or newer with mingw64
+- Must install extensions:
+  - C/C++
+  - C/C++ Extension Pack
+  - C/C++ Themes
+  - CMake
+  - CMake Tools
+- https://code.visualstudio.com/docs/cpp/config-mingw
+- Configure VSCode to use GCC with mingw64
+- https://code.visualstudio.com/docs/cpp/cmake-linux
+- Once configured, select "Build" within VSCode
+  - Output is .\build\bin\main.exe
+
+
+WSL 2
+- Install the following programs/libraries:
+  - gcc
+  - g++
+  - gdb
+  - cmake (version 3.28 or later)
+  - libfreetype6
+  - libfreetype-dev
+  - libcurl4-openssl-dev
+  - xorg
+  - libx11-dev
+  - libopengl-dev
+  - libgl1-mesa-dev
+  - libudev-dev
+  - libopenal-dev
+  - libvorbis-dev
+  - libflac-dev
+  - libxrandr-dev
+  - libxcursor-dev
+- Make a new folder, cd into it
+- Run "cmake .."
+- Run "cmake --build ."
+- Output is ./bin/quiz
