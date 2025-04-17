@@ -1,0 +1,1 @@
+-I"C:/Users/kamilae/projects/CURLTE~4/build/_deps/sfml-src/src" -isystem "C:/Users/kamilae/projects/CURLTE~4/build/_deps/sfml-src/include" -isystem "C:/Users/kamilae/projects/CURLTE~4/build/_deps/sfml-src/extlibs/headers/minimp3" -isystem "C:/Users/kamilae/vcpkg/installed/x64-windows/include/AL" -isystem "C:/Users/kamilae/vcpkg/installed/x64-windows/include"
