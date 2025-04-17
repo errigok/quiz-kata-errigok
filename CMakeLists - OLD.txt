@@ -1,0 +1,34 @@
+cmake_minimum_required(VERSION 3.28)
+
+set(CMAKE_C_COMPILER "C:/msys64/mingw64/bin/gcc.exe")
+set(CMAKE_CXX_COMPILER "C:/msys64/mingw64/bin/g++.exe")
+#set(CMAKE_PREFIX_PATH "C:/Users/kamilae/vcpkg/installed/x64-windows/share")
+set(CMAKE_TOOLCHAIN_FILE "C:/Users/kamilae/vcpkg/scripts/buildsystems/vcpkg.cmake")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lcurl")
+
+project(CMakeSFMLProject LANGUAGES CXX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+include(FetchContent)
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 2.6.x
+    GIT_SHALLOW ON
+    EXCLUDE_FROM_ALL
+    SYSTEM)
+FetchContent_MakeAvailable(SFML)
+
+# Set the CURL_ROOT environment variable
+set(CURL_ROOT "C:/Users/kamilae/vcpkg/installed/x64-windows")
+
+# Specify the paths to the cURL library and include directories
+set(CURL_INCLUDE_DIR "${CURL_ROOT}/include")
+set(CURL_LIBRARY "${CURL_ROOT}/lib/libcurl.lib")
+
+find_package(CURL REQUIRED)
+
+add_executable(main src/main.cpp src/question.cpp src/button.cpp src/scroll_bar.cpp src/drop_down.cpp src/number_text_box.cpp src/radio_button.cpp)
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(main PRIVATE sfml-graphics)
+target_link_libraries(main PUBLIC CURL::libcurl)
